@@ -1,0 +1,79 @@
+.signup_page {
+    background-color: white;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form_container {
+    width: 400px;
+    height: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    /* background-color: aqua; */
+    border: 1px solid #dcdcdc6d;
+}
+
+.form {
+    /* background-color: green; */
+    width: 100%;
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form_head {
+    height: 50px;
+    /* background-color: blue; */
+    font-size: 1.8em;
+    font-family: var(--font-bungee);
+}
+
+.input {
+    font-family: var(--font-geist-mono);
+    font-weight: bold;
+    font-size: 1em;
+    height: 50px;
+    width: 100%;
+    border: 1px solid gainsboro;
+    padding: 10px;
+    border-radius: 4px;
+    outline: none;
+}
+
+.submit {
+    background-color: var(--header-btn-bg);
+    color: white;
+}
+
+.google_github_auth{
+    margin-bottom: 20px;
+    color: var(--header-btn-bg);
+}
+
+.line_with_text {
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: black;
+    font-family: var(--font-geist-sans);
+    width: 100%;
+    height: 40px;
+}
+
+.line_with_text::before,
+.line_with_text::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid gainsboro;
+}
+.line_with_text::before{
+    margin-right: 10px;
+}
+.line_with_text::after{
+    margin-left: 10px;
+}
