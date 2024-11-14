@@ -52,6 +52,10 @@
 .google_github_auth{
     margin-bottom: 20px;
     color: var(--header-btn-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .line_with_text {

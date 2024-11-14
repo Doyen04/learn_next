@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import style from '@/styles/signup_page.module.css'
+import Image from 'next/image';
+import { signIn } from '~@/auth';
 
+import google_icon from '@/assets/svg/google-icon.svg'
+import githun_icon from '@/assets/svg/github-icon.svg'
 
 function Signup() {
     return (
@@ -16,8 +20,27 @@ function Signup() {
                 <div className={style.line_with_text}>
                     <span>OR</span>
                 </div>
-                <input type="button" value="Google" className={`${style.input} ${style.google_github_auth}`} />
-                <input type="button" value="Github" className={`${style.input} ${style.google_github_auth}`} />
+                <form action={async () => {
+                    "use server"
+
+                    await signIn('google')
+                }}>
+                    <button type='submit' className={`${style.input} ${style.google_github_auth}`} >
+                        <Image src={google_icon} alt="Google Sign In" width={'20'} height={'20'} />
+                        <span>Google</span>
+                    </button>
+                </form>
+
+                <form action={async () => {
+                    "use server"
+
+                    await signIn('github',{redirectTo: '/'} )
+                }}>
+                    <button type='submit' className={`${style.input} ${style.google_github_auth}`} >
+                        <Image src={githun_icon} alt='google sign in' width={'20'} height={'20'} />
+                        <span>Github</span>
+                    </button>
+                </form>
             </div>
         </section>
     )

@@ -18,7 +18,16 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 40%;
+    width: 45%;
+}
+.signin_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
+}
+.signin_container>img{
+    border-radius: 50%;
 }
 .signup_button{
     width: 80px;
