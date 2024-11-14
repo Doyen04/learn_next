@@ -1,5 +1,5 @@
 .signup_page {
-    background-color: white;
+    background-color: #dcdcdc69;
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -12,7 +12,7 @@
     height: 500px;
     padding: 20px;
     border-radius: 10px;
-    /* background-color: aqua; */
+    background-color: white;
     border: 1px solid #dcdcdc6d;
 }
 
