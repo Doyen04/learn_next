@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { signIn } from '~@/auth';
 
 import google_icon from '@/assets/svg/google-icon.svg'
-import githun_icon from '@/assets/svg/github-icon.svg'
+import github_icon from '@/assets/svg/github-icon.svg'
 
 function Signup() {
     return (
@@ -23,7 +23,7 @@ function Signup() {
                 <form action={async () => {
                     "use server"
 
-                    await signIn('google')
+                    await signIn('google',{redirectTo : "/"})
                 }}>
                     <button type='submit' className={`${style.input} ${style.google_github_auth}`} >
                         <Image src={google_icon} alt="Google Sign In" width={'20'} height={'20'} />
@@ -37,7 +37,7 @@ function Signup() {
                     await signIn('github',{redirectTo: '/'} )
                 }}>
                     <button type='submit' className={`${style.input} ${style.google_github_auth}`} >
-                        <Image src={githun_icon} alt='google sign in' width={'20'} height={'20'} />
+                        <Image src={github_icon} alt='google sign in' width={'20'} height={'20'} />
                         <span>Github</span>
                     </button>
                 </form>
