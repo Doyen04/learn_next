@@ -29,7 +29,7 @@ async function Header() {
                                 Sign Out
                             </button>
                         </form>
-                        <Image src={session?.user?.image} alt='avatar' width={40} height={40} />
+                        <Image src={session?.user?.image as string} alt='avatar' width={40} height={40} />
                     </div>
 
                 ) : (
