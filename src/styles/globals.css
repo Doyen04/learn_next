@@ -1,3 +1,6 @@
+:root{
+    --header-btn-bg:#3c6caf;
+}
 html,
 body {
     max-width: 100vw;

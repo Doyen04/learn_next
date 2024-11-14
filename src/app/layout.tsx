@@ -7,6 +7,11 @@ const geistSans = localFont({
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+const bungee = localFont({
+  src: "../assets/fonts/Bungee-Regular.ttf",
+  variable: "--font-bungee",
+  weight: "100 900",
+});
 const geistMono = localFont({
   src: "../assets/fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -25,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${bungee.variable} ${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>
     </html>
