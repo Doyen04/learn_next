@@ -9,6 +9,7 @@ import google_icon from '@/assets/svg/google-icon.svg'
 import github_icon from '@/assets/svg/github-icon.svg'
 
 import AnimatedInput from '@/components/animatedInput';
+import AnimatedButton from '@/components/animatedButton';
 
 function Signup() {
     
@@ -16,10 +17,11 @@ function Signup() {
         <section className={style.signup_page}>
             <div className={style.form_container}>
                 <h1 className={style.form_head}>Sign Up</h1>
-                <form action="" method="post" className={style.form}>
+                <form action={''} method="post" className={style.form} >
                     <AnimatedInput type='email' name='email' placeholder='Email' input_style={style.input} placeholder_style={style.email_placeholder} />
                     <AnimatedInput type='password' name='password' placeholder='Password' input_style={style.input} placeholder_style={style.password_placeholder} />
-                    <input type="button" value="Submit" className={`${style.input} ${style.submit}`} />
+                    {/* <input type="button" value="Submit" className={`${style.input} ${style.submit}`} /> */}
+                    <AnimatedButton text='submit' type='button' style={`${style.input} ${style.submit}`}/>
                     <Link href=""></Link>
                 </form>
                 <div className={style.line_with_text}>

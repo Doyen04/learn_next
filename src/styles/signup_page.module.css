@@ -58,6 +58,8 @@
     z-index: 20;
     font-family: var(--font-geist-mono);
     font-size: 1em;
+    -webkit-user-select: none;
+    user-select: none;
 }
 .email_placeholder{
     transform: translate(10px, 15px);
@@ -70,6 +72,8 @@
 .submit {
     background-color: var(--header-btn-bg);
     color: white;
+    justify-content: center;
+    align-items: center;
 }
 
 .google_github_auth{
