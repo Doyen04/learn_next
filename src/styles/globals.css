@@ -1,5 +1,6 @@
 :root{
     --header-btn-bg:#3c6caf;
+    
 }
 html,
 body {
@@ -18,5 +19,5 @@ body {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-
+    text-decoration: none;
 }

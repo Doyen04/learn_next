@@ -2,24 +2,59 @@
     background-color: #dcdcdc69;
     width: 100%;
     min-height: 100vh;
+}
+
+.signup_page_header {
+    font-family: var(--font-bungee);
+    background-color: white;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10vw;
+}
+
+.signup_page_logo>a {
+    display: flex;
+    align-items: flex-end;
+    color: black;
+}
+
+.signup_page_button {
+
+    font-family: var(--font-geist-sans);
+    width: 80px;
+    height: 45px;
+    border: none;
+    background-color: var(--header-btn-bg);
+    border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.signup_page_button>a {
+    color: white;
+}
+
 .form_container {
-    width: 400px;
-    height: 500px;
+    width: 100%;
+    height: 90vh;
+    background-color: white;
     padding: 20px;
     border-radius: 10px;
-    background-color: white;
-    border: 1px solid #dcdcdc6d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .form {
+    border: 1px solid #dcdcdc6d;
+    width: 400px;
+    /* height: 400px; */
+    padding: 20px;
     /* background-color: green; */
-    width: 100%;
-    /* height: 100%; */
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -45,12 +80,14 @@
     border-radius: 4px;
     outline: none;
 }
-.input::placeholder{
+
+.input::placeholder {
     display: none;
     color: transparent;
 }
 
-.email_placeholder,.password_placeholder{
+.email_placeholder,
+.password_placeholder {
     border: none;
     color: #757581;
     font-weight: bold;
@@ -61,11 +98,12 @@
     -webkit-user-select: none;
     user-select: none;
 }
-.email_placeholder{
+
+.email_placeholder {
     transform: translate(10px, 15px);
 }
 
-.password_placeholder{
+.password_placeholder {
     transform: translate(10px, 15px);
 }
 
@@ -76,7 +114,7 @@
     align-items: center;
 }
 
-.google_github_auth{
+.google_github_auth {
     margin-bottom: 20px;
     color: var(--header-btn-bg);
     display: flex;
@@ -102,9 +140,11 @@
     flex: 1;
     border-bottom: 1px solid gainsboro;
 }
-.line_with_text::before{
+
+.line_with_text::before {
     margin-right: 10px;
 }
-.line_with_text::after{
+
+.line_with_text::after {
     margin-left: 10px;
 }

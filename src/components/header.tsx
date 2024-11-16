@@ -9,7 +9,7 @@ async function Header() {
     return (
         <header className={style.header}>
             <div className={style.logo_container}>
-                <LightbulbIcon color='#3c6caf' size={'50px'} />
+                <LightbulbIcon color='#3c6caf' size={'40px'} />
                 <p>Learn</p>
             </div>
             <nav className={style.nav}>
