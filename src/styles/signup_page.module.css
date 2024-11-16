@@ -13,6 +13,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 10vw;
+    border-bottom: 1px solid gainsboro;
 }
 
 .signup_page_logo>a {
@@ -23,9 +24,10 @@
 
 .signup_page_button {
 
-    font-family: var(--font-geist-sans);
-    width: 80px;
-    height: 45px;
+    font-family: var(--font-bungee);
+    font-size: .9em;
+    width: 72px;
+    height: 40px;
     border: none;
     background-color: var(--header-btn-bg);
     border-radius: 5px;
@@ -48,9 +50,14 @@
     justify-content: center;
     align-items: center;
 }
-
+.forgotten_password{
+    width: 100%;
+    text-align: end;
+    font-family: var(--font-geist-mono);
+    font-size: .8em;
+}
 .form {
-    border: 1px solid #dcdcdc6d;
+    /* border: 1px solid #dcdcdc6d; */
     width: 400px;
     /* height: 400px; */
     padding: 20px;
@@ -86,8 +93,7 @@
     color: transparent;
 }
 
-.email_placeholder,
-.password_placeholder {
+._placeholder {
     border: none;
     color: #757581;
     font-weight: bold;
@@ -97,13 +103,6 @@
     font-size: 1em;
     -webkit-user-select: none;
     user-select: none;
-}
-
-.email_placeholder {
-    transform: translate(10px, 15px);
-}
-
-.password_placeholder {
     transform: translate(10px, 15px);
 }
 

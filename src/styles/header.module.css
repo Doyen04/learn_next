@@ -1,12 +1,12 @@
 .header{
     width: 100%;
-    height: 68px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 10vw;
+    padding: 0px 10vw;
     font-family: var(--font-bungee);
-    border-bottom: 1px solid var(--header-btn-bg);
+    border-bottom: 1px solid gainsboro;
 }
 
 .logo_container{

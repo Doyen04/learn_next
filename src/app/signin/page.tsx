@@ -12,7 +12,7 @@ import github_icon from '@/assets/svg/github-icon.svg'
 import AnimatedInput from '@/components/animatedInput';
 import AnimatedButton from '@/components/animatedButton';
 
-function Signup() {
+function Signin() {
 
     return (
         <section className={style.signup_page}>
@@ -24,18 +24,20 @@ function Signup() {
                     </Link>
                 </div>
                 <div className={style.signup_page_button} >
-                    <Link href={'/signin'}>LOGIN</Link>
+                    <Link href={'/signup'}>Signup</Link>
                 </div>
             </header>
             <div className={style.form_container}>
                 <div style={{ padding: '20px', border: '1px solid #dcdcdc6d', borderRadius: '5px' }}>
-                    <h1 className={style.form_head}>Sign Up</h1>
+                    <h1 className={style.form_head}>Sign In</h1>
                     <form action={''} method="post" className={style.form} >
-                        <AnimatedInput type='text' name='username' placeholder='Username' input_style={style.input} placeholder_style={style._placeholder} />
                         <AnimatedInput type='email' name='email' placeholder='Email' input_style={style.input} placeholder_style={style._placeholder} />
                         <AnimatedInput type='password' name='password' placeholder='Password' input_style={style.input} placeholder_style={style._placeholder} />
+                        <span className={style.forgotten_password}>
+                            Forgotten password? <Link href={'/recover'}>here</Link>
+                        </span>
                         {/* <input type="button" value="Submit" className={`${style.input} ${style.submit}`} /> */}
-                        <AnimatedButton text='SIGNUP' type='button' style={`${style.input} ${style.submit}`} />
+                        <AnimatedButton text='SIGNIN' type='button' style={`${style.input} ${style.submit}`} />
                         <Link href=""></Link>
                     </form>
                     <div className={style.line_with_text}>
@@ -68,4 +70,4 @@ function Signup() {
     )
 }
 
-export default Signup;
+export default Signin;
