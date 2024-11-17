@@ -1,18 +1,23 @@
+
 import style from '@/styles/header.module.css'
 import { LightbulbIcon } from 'lucide-react';
 import Link from 'next/link';
 import { auth, signOut } from '~@/auth';
 import Image from 'next/image';
+import Button from './toggle_button';
+
 
 async function Header() {
     const session = await auth()
+
     return (
         <header className={style.header}>
             <div className={style.logo_container}>
                 <LightbulbIcon color='#3c6caf' size={'40px'} />
                 <p>Learn</p>
             </div>
-            <nav className={style.nav}>
+            <Button />
+            <nav className={style.nav} >
                 <div>About</div>
                 <div>Blog</div>
                 <div>Contact</div>
