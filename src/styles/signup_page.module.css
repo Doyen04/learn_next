@@ -50,12 +50,14 @@
     justify-content: center;
     align-items: center;
 }
-.forgotten_password{
+
+.forgotten_password {
     width: 100%;
     text-align: end;
     font-family: var(--font-geist-mono);
     font-size: .8em;
 }
+
 .form {
     /* border: 1px solid #dcdcdc6d; */
     width: 400px;
@@ -146,4 +148,10 @@
 
 .line_with_text::after {
     margin-left: 10px;
+}
+
+@media (max-width: 358px) {
+    .form {
+        width: 350px;
+    }
 }
