@@ -19,7 +19,7 @@
 .menu_toggle {
     background-color: var(--header-btn-bg);
     width: 70px;
-    height: 50px;
+    height: 40px;
     border: none;
     border-radius: 5px;
     color: white;

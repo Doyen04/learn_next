@@ -58,16 +58,19 @@
     font-size: .8em;
 }
 
-.form {
-    /* border: 1px solid #dcdcdc6d; */
-    width: 400px;
-    /* height: 400px; */
-    padding: 20px;
-    /* background-color: green; */
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    position: relative;
+@media (min-width: 400px) {
+    .form {
+        /* border: 1px solid #dcdcdc6d; */
+        width: 400px;
+        /* height: 400px; */
+        padding: 20px;
+        /* background-color: green; */
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        position: relative;
+    }
+
 }
 
 .form_head {
@@ -150,8 +153,14 @@
     margin-left: 10px;
 }
 
-@media (max-width: 358px) {
+@media (max-width: 399px) {
     .form {
-        width: 350px;
+        width: 330px;
+        padding: 20px;
+        /* background-color: green; */
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        position: relative;
     }
 }
