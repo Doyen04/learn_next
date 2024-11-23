@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import style from '@/styles/signup_page.module.css'
 import Image from 'next/image';
-import { signIn } from '~@/auth';
+import { signIn } from '~@/lib/auth';
 import { Lightbulb } from 'lucide-react';
 
 
