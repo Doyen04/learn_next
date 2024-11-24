@@ -1,13 +1,13 @@
 import { signIn } from '@/lib/auth';
 
-const submitHandler = async  ()=> {
+export const submitHandler = async  (email: string, password: string)=> {
     const data = await signIn("credentials", {
         email :email, 
         password: password
     })
-    // console.log(data);
+    console.log(data);
     
-    // if (data) {
+    if (data) {
 
-    // }
+    }
 }

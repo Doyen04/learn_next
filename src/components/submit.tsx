@@ -6,7 +6,7 @@ import AnimatedButton from '@/components/animatedButton';
 import AnimatedInput from '@/components/animatedInput';
 import Link from 'next/link';
 import { useState } from 'react';
-import { signIn } from '@/lib/auth';
+import { submitHandler } from '@/lib/signinHandler';
 
 
 
@@ -21,10 +21,12 @@ export default function Form() {
         setPassword(ev.target.value)
     }
 
-    
+    function submit() {
+        submitHandler(email, password);
+    }
 
     return (
-        <form className={style.form} method="POST" onSubmit={submitHandler}>
+        <form className={style.form} method="POST" onSubmit={submit}>
 
             <AnimatedInput
                 type='email'
