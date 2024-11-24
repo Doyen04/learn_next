@@ -1,4 +1,4 @@
-
+"use client"
 
 import style from '@/styles/signup_page.module.css'
 
@@ -6,7 +6,7 @@ import AnimatedButton from '@/components/animatedButton';
 import AnimatedInput from '@/components/animatedInput';
 import Link from 'next/link';
 import { useState } from 'react';
-import { submitHandler } from '@/lib/signinHandler';
+import { signInHandler } from '@/lib/signinHandler';
 
 
 
@@ -22,7 +22,7 @@ export default function Form() {
     }
 
     function submit() {
-        submitHandler(email, password);
+        signInHandler(email, password);
     }
 
     return (
