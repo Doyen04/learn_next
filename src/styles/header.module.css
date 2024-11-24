@@ -8,6 +8,7 @@
     font-family: var(--font-bungee);
     border-bottom: 1px solid gainsboro;
     position: relative;
+    background-color: light-black();
 }
 
 .logo_container {

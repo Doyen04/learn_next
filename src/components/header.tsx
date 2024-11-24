@@ -2,7 +2,7 @@
 import style from '@/styles/header.module.css'
 import { LightbulbIcon } from 'lucide-react';
 import Link from 'next/link';
-import { auth, signOut } from '~@/lib/auth';
+import { auth, signOut } from '@/lib/auth';
 import Image from 'next/image';
 import Button from './toggle_button';
 

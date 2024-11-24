@@ -1,6 +1,8 @@
-import { log } from "console";
+
+
+import { hash } from "bcrypt";
 import { NextResponse } from "next/server";
-import { prisma } from "~@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 export function GET() {
     return NextResponse.json({sucess: true})
@@ -9,25 +11,38 @@ export function GET() {
 export async function POST(req: Request) {
     try {
         const data = await req.json()
+        const {username, email, password} = data
+
         const emailExist = await prisma.user.findUnique({
             where: {
-                email: data.email
+                email: email
             }
         })
         const userExist = await prisma.user.findUnique({
             where: {
-                username: data.username,
+                username: username,
             }
         })
         if (userExist) {
-            return NextResponse.json({error: "username already exists"})
+            return NextResponse.json({message: "username already exists"},{status: 409})
         }
         if (emailExist) {
-            return NextResponse.json({error: "email already exists"})
+            return NextResponse.json({message: "email already exists"}, {status: 409})
         }
-        return NextResponse.json(data);
+        //work on this
+        //how to chane data base then y the error
+        const hashedPassword = await hash(password, 10)
+        
+        const newUser = await prisma.user.create({
+            data:{
+                username,
+                email,
+                password: hashedPassword,
+            }
+        })
+        return NextResponse.json({ username: newUser.username , email , message: "user-- created sucessfully"},{status: 201});
     } catch (e) {
-        log(e)
-        return NextResponse.json({error: "bad"})
+        console.log(e)
+        return NextResponse.json({message: "bad"},{status: 500})
     }
 }
