@@ -17,6 +17,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     },
     //how to handle error
     //add a call back to add overlapping email
+    //An empty string ("") was passed to the src attribute. 
+    //This may cause the browser to download the whole page again over the network. 
+    //To fix this, either do not render the element at all or pass null to src instead of an empty string.
     providers: [
         GitHub,
         Google,
