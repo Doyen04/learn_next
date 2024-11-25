@@ -36,6 +36,7 @@ export default function Form() {
                 name='email'
                 placeholder='Email'
                 input_style={style.input}
+                value={email}
                 placeholder_style={style._placeholder}
                 onChange={handleInputChange} />
 
@@ -44,6 +45,7 @@ export default function Form() {
                 name='password'
                 placeholder='Password'
                 input_style={style.input}
+                value={password}
                 placeholder_style={style._placeholder}
                 onChange={handleInputChange} />
 

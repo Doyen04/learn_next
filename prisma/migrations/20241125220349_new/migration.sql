@@ -1,9 +1,10 @@
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
     "username" TEXT,
     "email" TEXT,
-    "password" TEXT NOT NULL,
+    "password" TEXT,
     "emailVerified" TIMESTAMP(3),
     "image" TEXT,
 

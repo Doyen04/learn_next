@@ -12,6 +12,10 @@ export async function POST(req: Request) {
     try {
         const data = await req.json()
         const {username, email, password} = data
+        
+        if (!username || !email || !password) {
+            return NextResponse.json({message: "empty exists"},{status: 409})
+        }
 
         const emailExist = await prisma.user.findUnique({
             where: {
