@@ -15,6 +15,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     pages: {
         signIn: "/signin",
     },
+    //how to handle error
     //add a call back to add overlapping email
     providers: [
         GitHub,
@@ -27,7 +28,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             },
             async authorize(credentials) {
                 if (!credentials.email || !credentials.password) {
-                    return null
+                    throw('error null')
+                    // return null
                 }
 
                 const userExist = await prisma.user.findUnique({
@@ -35,13 +37,13 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                 })
 
                 if (!userExist) {
-                    return null
+                    throw(`${userExist} error for not`)
                 }
 
-                const isPasswordValid = await compare(credentials?.password as string, userExist?.password);
+                const isPasswordValid = await compare(credentials?.password as string, userExist?.password as string);
 
                 if (!isPasswordValid) {
-                    return null
+                    throw('no password')
                 }
                 // Check if an account already exists for this user
                 const existingAccount = await prisma.account.findFirst({
@@ -61,7 +63,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
                 return {
                     id: `${userExist?.id}`,
-                    name: userExist?.username,
+                    name: userExist?.name,
                     email: userExist?.email
                 }
             }

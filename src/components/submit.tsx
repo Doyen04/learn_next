@@ -5,24 +5,27 @@ import style from '@/styles/signup_page.module.css'
 import AnimatedButton from '@/components/animatedButton';
 import AnimatedInput from '@/components/animatedInput';
 import Link from 'next/link';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { signInHandler } from '@/lib/signinHandler';
-
-
 
 
 export default function Form() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    function handleInputChange(ev:React.ChangeEvent<HTMLInputElement>) {
+    function handleInputChange(ev: React.ChangeEvent<HTMLInputElement>) {
         ev.preventDefault()
-        setEmail(ev.target.value)
-        setPassword(ev.target.value)
+        if (ev.target.type == "email") setEmail(ev.target.value)
+
+        if (ev.target.type == "password") setPassword(ev.target.value)
     }
 
-    function submit() {
-        signInHandler(email, password);
+    async function submit(ev: FormEvent) {
+        ev.preventDefault()
+
+        const data = await signInHandler(email, password);
+        console.log(data);
+
     }
 
     return (
