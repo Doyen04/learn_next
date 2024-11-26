@@ -42,7 +42,7 @@ function AnimatedButton({ text, style, type }: { text: string, style: string, ty
     }
 
     return (
-        <button onClick={animate} ref={textRef} type={type} style={{ display: "flex", gap: "1px" }} className={style}>
+        <button onClick={animate} ref={textRef} type={type} style={{ display: "flex", gap: "1px" }} className={style} disabled>
             {text.split("").map((char: string, index: number) => (
                 <span key={index} className="char">
                     {char === " " ? "\u00A0" : char}

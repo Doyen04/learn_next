@@ -2,13 +2,16 @@
 
 
 import AnimatedInput from '@/components/animatedInput';
-import AnimatedButton from '@/components/animatedButton';
+import { ErrorObject, UserSchema } from '@/lib/zodSchema';
+// import AnimatedButton from '@/components/animatedButton';
 import style from '@/styles/signup_page.module.css'
+
 import Link from "next/link";
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ErrorObject, UserSchema } from '@/lib/zodSchema';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -70,11 +73,23 @@ export function SignUpForm() {
                 body: JSON.stringify(validatedData.data),
             });
 
-            const data = await res.json();
-            console.log(data, 888888);
+            const data = res.json();
+            toast.promise(data, {
+                pending: "Uploading Data",
+                success: "User Created",
+                error: "error",
+            },{position: "top-right"})
+
+            const resData = await data
+
+            console.log(resData, 888888);
 
             if (res.ok) {
-                // setResponseMessage(data.message); // Success message
+
+                toast.success(resData.message, {
+                    position: 'top-right',
+                })
+
                 setFormData({
                     username: '',
                     email: '',
@@ -82,7 +97,10 @@ export function SignUpForm() {
                 }); // Reset form
                 router.push('/signin')
             } else {
-                // setResponseMessage(data.message || 'Something went wrong!');
+                toast.error(resData.message, {
+                    position: 'top-right',
+                })
+
             }
         } catch (e) {
             console.log(e);
@@ -93,6 +111,9 @@ export function SignUpForm() {
 
     return (
         <form action={'/api/user'} method="post" className={style.form} onSubmit={handleSubmit}>
+
+            <ToastContainer />
+
             <AnimatedInput
                 onChange={handleInputChange}
                 type='text'
@@ -103,6 +124,7 @@ export function SignUpForm() {
                 error={(errorMsg.username && formData.username) ? errorMsg.username : []}
                 error_style={style.error_message}
                 placeholder_style={style._placeholder} />
+
             <AnimatedInput
                 onChange={handleInputChange}
                 type='email'
@@ -113,6 +135,7 @@ export function SignUpForm() {
                 error={(errorMsg.email && formData.email) ? errorMsg.email : []}
                 error_style={style.error_message}
                 placeholder_style={style._placeholder} />
+
             <AnimatedInput
                 onChange={handleInputChange}
                 type='password'
@@ -123,8 +146,12 @@ export function SignUpForm() {
                 error={(errorMsg.password && formData.password) ? errorMsg.password : []}
                 error_style={style.error_message}
                 placeholder_style={style._placeholder} />
-            {/* <input type="button" value="Submit" className={`${style.input} ${style.submit}`} /> */}
-            <AnimatedButton text='SIGNUP' type='submit' style={`${style.input} ${style.submit}`} />
+            <input
+                type="submit"
+                value="Submit"
+                className={`${style.input} ${style.submit}`}
+                disabled={(errorMsg.email || errorMsg.username || errorMsg.password) ? true : false} />
+            {/* <AnimatedButton text='SIGNUP' type='submit' style={`${style.input} ${style.submit}`} /> */}
             <Link href=""></Link>
         </form>
     )

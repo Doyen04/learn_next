@@ -46,7 +46,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                 const isPasswordValid = await compare(credentials?.password as string, userExist?.password as string);
 
                 if (!isPasswordValid) {
-                    throw('no password')
+                    throw('invalid password')
                 }
                 // Check if an account already exists for this user
                 const existingAccount = await prisma.account.findFirst({
