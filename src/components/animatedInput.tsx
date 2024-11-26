@@ -10,11 +10,13 @@ interface AnimatedInputProps {
     value: string
     input_style: string;
     placeholder_style: string;
+    error: string[] |undefined;
+    error_style: string;
     onChange?: React.ChangeEventHandler<HTMLInputElement>; // Proper typing here
 }
 
 function AnimatedInput(
-    { type, name, placeholder, placeholder_style, input_style,value, onChange }: AnimatedInputProps) {
+    { type, name, placeholder, placeholder_style, input_style, value,error, error_style, onChange }: AnimatedInputProps) {
     const inputRef = useRef<HTMLInputElement>(null);
     const labelRef = useRef<HTMLLabelElement>(null);
 
@@ -32,8 +34,19 @@ function AnimatedInput(
 
     return (
         <div>
-            <label ref={labelRef} htmlFor={type} className={placeholder_style} style={{pointerEvents:"none"}}>{placeholder}</label>
-            <input ref={inputRef} value={value} onFocus={handleFocus} onBlur={handleBlur} type={type} name={name} id={name} placeholder={placeholder} className={input_style} onChange={onChange} />
+            <label ref={labelRef} htmlFor={type} className={placeholder_style} style={{ pointerEvents: "none" }}>{placeholder}</label>
+            <input
+                ref={inputRef}
+                value={value}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                type={type}
+                name={name}
+                id={name}
+                placeholder={placeholder}
+                className={input_style}
+                onChange={onChange} required />
+                <p className={error_style}>{error}</p> 
         </div>
     )
 }

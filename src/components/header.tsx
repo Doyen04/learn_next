@@ -1,6 +1,6 @@
 
 import style from '@/styles/header.module.css'
-import { LightbulbIcon } from 'lucide-react';
+import { LightbulbIcon, UserIcon } from 'lucide-react';
 import Link from 'next/link';
 import { auth, signOut } from '@/lib/auth';
 import Image from 'next/image';
@@ -34,7 +34,12 @@ async function Header() {
                                 Sign Out
                             </button>
                         </form>
-                        <Image src={session?.user?.image as string} alt='avatar' width={40} height={40} />
+                        {
+                            (!session?.user?.image) ?
+                                <UserIcon size={40} />
+                                :
+                                <Image src={session?.user?.image as string} alt='avatar' width={40} height={40} />
+                        }
                     </div>
 
                 ) : (

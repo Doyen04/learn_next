@@ -7,35 +7,67 @@ import style from '@/styles/signup_page.module.css'
 import Link from "next/link";
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { ErrorObject, UserSchema } from '@/lib/zodSchema';
+
+
+
 
 export function SignUpForm() {
+
+    const Errordata: ErrorObject = {
+        username: [],
+        email: [],
+        password: []
+    }
+
     const router = useRouter()
+
     const [formData, setFormData] = useState({
         username: '',
         email: '',
         password: ''
     })
 
+    const [errorMsg, setErrorMessage] = useState(Errordata)
+
     function handleInputChange(ev: React.ChangeEvent<HTMLInputElement>) {
         ev.preventDefault()
+
         setFormData({
             ...formData,
             [ev.target.name]: ev.target.value
         })
-        console.log(formData);
+
+        const tempData = {
+            username: ev.target.name === 'username' ? ev.target.value : formData.username,
+            email: ev.target.name === 'email' ? ev.target.value : formData.email,
+            password: ev.target.name === 'password' ? ev.target.value : formData.password,
+        }
+
+        const validationError = UserSchema.safeParse(tempData).error?.format()
+        setErrorMessage({
+            username: validationError?.username?._errors,
+            email: validationError?.email?._errors,
+            password: validationError?.password?._errors
+        })
 
     }
 
     async function handleSubmit(ev: FormEvent) {
         ev.preventDefault()
 
+        const validatedData = UserSchema.safeParse(formData)
+        if (!validatedData.success) {
+            // console.log(validatedData.error);
+            return;
+        }
         try {
             const res = await fetch('/api/user', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(validatedData.data),
             });
 
             const data = await res.json();
@@ -43,10 +75,12 @@ export function SignUpForm() {
 
             if (res.ok) {
                 // setResponseMessage(data.message); // Success message
-                setFormData({  username: '',
+                setFormData({
+                    username: '',
                     email: '',
-                    password: '' }); // Reset form
-                    router.push('/signin')
+                    password: ''
+                }); // Reset form
+                router.push('/signin')
             } else {
                 // setResponseMessage(data.message || 'Something went wrong!');
             }
@@ -66,6 +100,8 @@ export function SignUpForm() {
                 placeholder='Username'
                 input_style={style.input}
                 value={formData.username}
+                error={(errorMsg.username && formData.username) ? errorMsg.username : []}
+                error_style={style.error_message}
                 placeholder_style={style._placeholder} />
             <AnimatedInput
                 onChange={handleInputChange}
@@ -74,6 +110,8 @@ export function SignUpForm() {
                 placeholder='Email'
                 input_style={style.input}
                 value={formData.email}
+                error={(errorMsg.email && formData.email) ? errorMsg.email : []}
+                error_style={style.error_message}
                 placeholder_style={style._placeholder} />
             <AnimatedInput
                 onChange={handleInputChange}
@@ -82,6 +120,8 @@ export function SignUpForm() {
                 value={formData.password}
                 placeholder='Password'
                 input_style={style.input}
+                error={(errorMsg.password && formData.password) ? errorMsg.password : []}
+                error_style={style.error_message}
                 placeholder_style={style._placeholder} />
             {/* <input type="button" value="Submit" className={`${style.input} ${style.submit}`} /> */}
             <AnimatedButton text='SIGNUP' type='submit' style={`${style.input} ${style.submit}`} />

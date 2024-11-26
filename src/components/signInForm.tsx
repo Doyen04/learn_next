@@ -4,26 +4,56 @@ import style from '@/styles/signup_page.module.css'
 
 import AnimatedButton from '@/components/animatedButton';
 import AnimatedInput from '@/components/animatedInput';
+import { ErrorObject, UserSchema } from '@/lib/zodSchema';
+
 import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 import { signInHandler } from '@/lib/signinHandler';
 
 
+
 export default function Form() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const Errordata: ErrorObject = {
+        email: [],
+        password: []
+    }
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    })
+
+    const [errorMsg, setErrorMessage] = useState(Errordata)
 
     function handleInputChange(ev: React.ChangeEvent<HTMLInputElement>) {
         ev.preventDefault()
-        if (ev.target.type == "email") setEmail(ev.target.value)
+        setFormData({
+            ...formData,
+            [ev.target.name]: ev.target.value
+        })
 
-        if (ev.target.type == "password") setPassword(ev.target.value)
+        const tempData = {
+            email: ev.target.name === 'email' ? ev.target.value : formData.email,
+            password: ev.target.name === 'password' ? ev.target.value : formData.password,
+        }
+
+        const validationError = UserSchema.omit({username: true}).safeParse(tempData).error?.format()
+        setErrorMessage({
+            email: validationError?.email?._errors,
+            password: validationError?.password?._errors
+        })
     }
 
     async function submit(ev: FormEvent) {
         ev.preventDefault()
 
-        const data = await signInHandler(email, password);
+        const validatedData = UserSchema.omit({username: true}).safeParse(formData)
+        if (!validatedData.success) {
+            console.log(validatedData.error);
+            return;
+        }
+        console.log(formData.email, formData.password);
+        
+        const data = await signInHandler(formData.email, formData.password);
         console.log(data);
 
     }
@@ -36,7 +66,9 @@ export default function Form() {
                 name='email'
                 placeholder='Email'
                 input_style={style.input}
-                value={email}
+                value={formData.email}
+                error={(errorMsg.email && formData.email) ? errorMsg.email : []}
+                error_style={style.error_message}
                 placeholder_style={style._placeholder}
                 onChange={handleInputChange} />
 
@@ -45,7 +77,9 @@ export default function Form() {
                 name='password'
                 placeholder='Password'
                 input_style={style.input}
-                value={password}
+                value={formData.password}
+                error={(errorMsg.password && formData.password) ? errorMsg.password : []}
+                error_style={style.error_message}
                 placeholder_style={style._placeholder}
                 onChange={handleInputChange} />
 

@@ -92,7 +92,12 @@
     border-radius: 4px;
     outline: none;
 }
-
+.error_message{
+    color: red;
+    width: 100%;
+    font-size: 0.7em;
+    font-family: var(--font-geist-sans);
+}
 .input::placeholder {
     display: none;
     color: transparent;
