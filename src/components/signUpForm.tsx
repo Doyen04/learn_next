@@ -74,9 +74,9 @@ export function SignUpForm() {
             });
 
             const data = res.json();
+            
             toast.promise(data, {
                 pending: "Uploading Data",
-                success: "User Created",
                 error: "error",
             },{position: "top-right"})
 

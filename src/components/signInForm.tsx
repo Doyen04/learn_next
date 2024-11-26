@@ -2,13 +2,16 @@
 
 import style from '@/styles/signup_page.module.css'
 
-import AnimatedButton from '@/components/animatedButton';
+// import AnimatedButton from '@/components/animatedButton';
 import AnimatedInput from '@/components/animatedInput';
 import { ErrorObject, UserSchema } from '@/lib/zodSchema';
 
 import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 import { signInHandler } from '@/lib/signinHandler';
+
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -36,7 +39,7 @@ export default function Form() {
             password: ev.target.name === 'password' ? ev.target.value : formData.password,
         }
 
-        const validationError = UserSchema.omit({username: true}).safeParse(tempData).error?.format()
+        const validationError = UserSchema.omit({ username: true }).safeParse(tempData).error?.format()
         setErrorMessage({
             email: validationError?.email?._errors,
             password: validationError?.password?._errors
@@ -46,21 +49,38 @@ export default function Form() {
     async function submit(ev: FormEvent) {
         ev.preventDefault()
 
-        const validatedData = UserSchema.omit({username: true}).safeParse(formData)
+        const validatedData = UserSchema.omit({ username: true }).safeParse(formData)
         if (!validatedData.success) {
             console.log(validatedData.error);
             return;
         }
         console.log(formData.email, formData.password);
-        
-        const data = await signInHandler(formData.email, formData.password);
-        console.log(data);
+
+        try {
+
+            const data = await signInHandler(formData.email, formData.password);
+            console.log(data, 7676776);
+            
+            if (data?.error) {
+                console.error("Sign-in failed:", data.error);
+                // Handle sign-in error (e.g., show error message)
+            } else {
+                console.log("Sign-in successful:", data);
+                // Handle successful sign-in (e.g., navigate to dashboard)
+            }
+        } catch (e) {
+            toast.error("Invalid Credentials", {
+                position: 'top-right',
+            })
+            console.log(e);
+            
+        }
 
     }
 
     return (
         <form className={style.form} method="POST" onSubmit={submit}>
-
+            <ToastContainer />
             <AnimatedInput
                 type='email'
                 name='email'
@@ -86,8 +106,13 @@ export default function Form() {
             <span className={style.forgotten_password}>
                 Forgotten password? <Link href={'/recover'}>here</Link>
             </span>
+            <input
+                type="submit"
+                value="Submit"
+                className={`${style.input} ${style.submit}`}
+                disabled={(errorMsg.email || errorMsg.password) ? true : false} />
 
-            <AnimatedButton text='SIGNIN' type='submit' style={`${style.input} ${style.submit}`} />
+            {/* <AnimatedButton text='SIGNIN' type='submit' style={`${style.input} ${style.submit}`} /> */}
 
         </form>
     )

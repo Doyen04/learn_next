@@ -1,3 +1,5 @@
+// "use server"
+
 import NextAuth from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { prisma } from "@/lib/prisma"
@@ -31,8 +33,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             },
             async authorize(credentials) {
                 if (!credentials.email || !credentials.password) {
-                    throw('error null')
-                    // return null
+                    // throw('error null')
+                    return null
                 }
 
                 const userExist = await prisma.user.findUnique({
@@ -40,13 +42,16 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                 })
 
                 if (!userExist) {
-                    throw(`${userExist} error for not`)
+                    // throw(`${userExist} error for not`)
+                    
+                    return null
                 }
 
                 const isPasswordValid = await compare(credentials?.password as string, userExist?.password as string);
 
                 if (!isPasswordValid) {
-                    throw('invalid password')
+                    // throw('invalid password')
+                    return null
                 }
                 // Check if an account already exists for this user
                 const existingAccount = await prisma.account.findFirst({

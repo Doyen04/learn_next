@@ -6,11 +6,9 @@ export const signInHandler = async  (email: string, password: string)=> {
     const data = await signIn("credentials", {
         email :email, 
         password: password,
-        redirectTo: '/'
+        redirect: false,
     })
     
-    if (data) {
-
-    }
+    
     return data
 }
