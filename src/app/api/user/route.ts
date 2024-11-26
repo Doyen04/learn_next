@@ -3,6 +3,7 @@
 import { hash } from "bcrypt";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { UserSchema } from "@/lib/zodSchema";
 
 export function GET() {
     return NextResponse.json({sucess: true})
@@ -15,6 +16,12 @@ export async function POST(req: Request) {
         
         if (!username || !email || !password) {
             return NextResponse.json({message: "empty exists"},{status: 409})
+        }
+
+        const validatedData = UserSchema.safeParse(data)
+        if (!validatedData.success) {
+            // console.log(validatedData.error);
+            return;
         }
 
         const emailExist = await prisma.user.findUnique({
