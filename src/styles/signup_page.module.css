@@ -92,7 +92,9 @@
     border-radius: 4px;
     outline: none;
 }
-
+input:focus{
+    background-color: inherit;
+}
 
 .error_message{
     color: red;
