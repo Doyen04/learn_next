@@ -12,6 +12,8 @@ import { signInHandler } from '@/lib/signinHandler';
 
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation';
+import { AuthError } from 'next-auth';
 
 
 
@@ -26,6 +28,7 @@ export default function Form() {
     })
 
     const [errorMsg, setErrorMessage] = useState(Errordata)
+    const router = useRouter()
 
     function handleInputChange(ev: React.ChangeEvent<HTMLInputElement>) {
         ev.preventDefault()
@@ -59,21 +62,27 @@ export default function Form() {
         try {
 
             const data = await signInHandler(formData.email, formData.password);
+            console.log(data?.error, 7676776);
             console.log(data, 7676776);
-            
+
             if (data?.error) {
                 console.error("Sign-in failed:", data.error);
                 // Handle sign-in error (e.g., show error message)
             } else {
                 console.log("Sign-in successful:", data);
+                router.push('/')
                 // Handle successful sign-in (e.g., navigate to dashboard)
             }
         } catch (e) {
-            toast.error("Invalid Credentials", {
-                position: 'top-right',
-            })
+            if (e instanceof AuthError) {
+                console.log(e);
+
+                toast.error("Invalid Credentials", {
+                    position: 'top-right',
+                })
+            }
             console.log(e);
-            
+
         }
 
     }

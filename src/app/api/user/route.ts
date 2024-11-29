@@ -2,10 +2,10 @@
 
 import { hash } from "bcrypt";
 import { NextResponse } from "next/server";
-import nodemailer from 'nodemailer';
 
 import { prisma } from "@/lib/prisma";
 import { UserSchema } from "@/lib/zodSchema";
+import { sendVerificationEmail } from "@/lib/email";
 
 
 export function GET() {
@@ -56,42 +56,8 @@ export async function POST(req: Request) {
                 password: hashedPassword,
             }
         })
-        const _email = "oluwasolaopeyemi93@gmail.com"
-
-        const sendVerificationEmail = async (email: string, token: string) => {
-            // nodemailer configuration. make sure to replace this with your native email provider in production.
-            // we will use mailtrap in this tutorial, so make sure you have the correct configuration in your .env
-            const transporter: nodemailer.Transporter = nodemailer.createTransport({
-                pool: true,
-                host: process.env.MAIL_HOST,
-                port: Number(process.env.EMAIL_PORT) || 0,
-                auth: {
-                    user: process.env.MAIL_USERNAME,
-                    pass: process.env.MAIL_PASSWORD,
-                },
-                
-            })
-
-            // the content of the email
-            const emailData = {
-                from: '"Blog Nextjs Auth" <verification@test.com>',
-                to: email,
-                subject: 'Email Verification',
-                html: `
-                <p>Click the link below to verify your email:</p>
-                <a href="http://localhost:3000/email/verify?email=${email}&token=${token}">Verify Email</a>`,
-            };
-
-            try {
-                // send the email
-                await transporter.sendMail(emailData);
-            } catch (error) {
-                console.error('Failed to send email:', error);
-                throw error;
-            }
-        };
-
-        sendVerificationEmail(_email, "tttttt");
+        
+        sendVerificationEmail(email, "jjjjjjjjj");
 
         return NextResponse.json({ username: newUser.username, email, message: "user created sucessfully" }, { status: 201 });
     } catch (e) {
