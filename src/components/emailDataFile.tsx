@@ -66,7 +66,7 @@ export function EmailTemplate({ email, token, username }: { email: string, token
                     Simply click the button below to confirm your email address:
                 </p>
                 <p>
-                    <a className={`${link}`} href={`http://localhost:3000/email/verify?email=${email}&token=${token}`}>Verify Email</a>
+                    <a className={`${link} ${ctaButton}`} href={`http://localhost:3000/email/verify?email=${email}&token=${token}`}>Verify Email</a>
                 </p>
                 <p>
                     If you did not sign up for this account, you can safely ignore this email.
