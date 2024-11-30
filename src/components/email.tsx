@@ -11,6 +11,8 @@ export const sendVerificationEmail = async (email: string, token: string, userna
     // nodemailer configuration. make sure to replace this with your native email provider in production.
     // we will use mailtrap in this tutorial, so make sure you have the correct configuration in your .env
     const htmiString = renderToStaticMarkup(<EmailTemplate email={email} token={token} username={username}/>)
+    console.log(htmiString);
+    
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         pool: true,
