@@ -1,14 +1,14 @@
-
+'use server'
 
 import { hash } from "bcrypt";
 import { NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
 import { UserSchema } from "@/lib/zodSchema";
-import { sendVerificationEmail } from "@/lib/email";
+import { sendVerificationEmail } from "@/components/email";
 
 
-export function GET() {
+export async function GET() {
     return NextResponse.json({ sucess: true })
 }
 
@@ -56,8 +56,7 @@ export async function POST(req: Request) {
                 password: hashedPassword,
             }
         })
-        
-        sendVerificationEmail(email, "jjjjjjjjj");
+        sendVerificationEmail(email, "jjjjjjjjj", username);
 
         return NextResponse.json({ username: newUser.username, email, message: "user created sucessfully" }, { status: 201 });
     } catch (e) {

@@ -14,7 +14,7 @@ function AnimatedButton({ text, style, type }: { text: string, style: string, ty
             gsap.fromTo(
                 chars,
                 { y: 0 },
-                {
+                { 
                     y: -10,                // Move each character up by 20px
                     duration: 0.8,      // Duration of each "jump"
                     ease: "power2.inOut",

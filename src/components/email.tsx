@@ -1,10 +1,16 @@
-import { EmailTemplate } from "@/components/emailDataFile";
-import nodemailer from "nodemailer"
-import React from "react";
+'use server'
 
-export const sendVerificationEmail = async (email: string, token: string) => {
+import { EmailTemplate } from "@/components/emailDataFile";
+
+import nodemailer from "nodemailer"
+
+
+export const sendVerificationEmail = async (email: string, token: string, username:string) => {
+    const { renderToStaticMarkup } = await import("react-dom/server");
+
     // nodemailer configuration. make sure to replace this with your native email provider in production.
     // we will use mailtrap in this tutorial, so make sure you have the correct configuration in your .env
+    const htmiString = renderToStaticMarkup(<EmailTemplate email={email} token={token} username={username}/>)
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         pool: true,
@@ -25,10 +31,10 @@ export const sendVerificationEmail = async (email: string, token: string) => {
 
     // the content of the email
     const emailData = {
-        from: '"Blog Nextjs Auth" <t@test.com>',
+        from: '"Learn-Next" <t@test.com>',
         to: email,
         subject: 'Email Verification',
-        react: React.createElement(EmailTemplate),
+        html: htmiString,
     };
 
     try {
@@ -37,8 +43,8 @@ export const sendVerificationEmail = async (email: string, token: string) => {
 
         const rs = await transporter.sendMail(emailData);
         console.log(rs);
-        
     } catch (error) {
+
         console.error('Failed to send email:', error);
         throw error;
     }

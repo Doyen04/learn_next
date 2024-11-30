@@ -10,8 +10,7 @@ import Link from "next/link";
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 
 
@@ -95,7 +94,9 @@ export function SignUpForm() {
                     email: '',
                     password: ''
                 }); // Reset form
+                
                 router.push('/signin')
+
             } else {
                 toast.error(resData.message, {
                     position: 'top-right',
@@ -112,7 +113,6 @@ export function SignUpForm() {
     return (
         <form action={'/api/user'} method="post" className={style.form} onSubmit={handleSubmit}>
 
-            <ToastContainer />
 
             <AnimatedInput
                 onChange={handleInputChange}

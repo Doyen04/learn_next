@@ -10,8 +10,8 @@ import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 import { signInHandler } from '@/lib/signinHandler';
 
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast} from 'react-toastify';
+
 import { useRouter } from 'next/navigation';
 import { AuthError } from 'next-auth';
 
@@ -89,7 +89,6 @@ export default function Form() {
 
     return (
         <form className={style.form} method="POST" onSubmit={submit}>
-            <ToastContainer />
             <AnimatedInput
                 type='email'
                 name='email'
