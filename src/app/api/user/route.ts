@@ -31,6 +31,7 @@ export async function POST(req: Request) {
                 username: username,
             }
         })
+        
         if (userExist) {
             return NextResponse.json({ message: "username already exists" }, { status: 409 })
         }
@@ -56,7 +57,7 @@ export async function POST(req: Request) {
                 password: hashedPassword,
             }
         })
-        sendVerificationEmail(email, "jjjjjjjjj", username);
+        sendVerificationEmail(email, username);
 
         return NextResponse.json({ username: newUser.username, email, message: "user created sucessfully" }, { status: 201 });
     } catch (e) {

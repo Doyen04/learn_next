@@ -49,7 +49,7 @@ export function EmailTemplate({ email, token, username }: { email: string, token
                         borderRadius: '5px',
                         fontSize: '16px',
                         marginTop: '20px',
-                    }} href={`http://localhost:3000/email/verify?email=${email}&token=${token}`}>Verify Email</a>
+                    }} href={`http://localhost:3000/verify-email?email=${email}&token=${token}`}>Verify Email</a>
                 </p>
                 <p>
                     If you did not sign up for this account, you can safely ignore this email.
