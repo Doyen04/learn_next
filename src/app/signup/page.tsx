@@ -24,7 +24,7 @@ function Signup() {
                 </div>
             </header>
             <div className={style.form_container}>
-                <div style={{ padding: '20px', border: '1px solid #dcdcdc6d', borderRadius: '5px' }}>
+                <div style={{ padding: '20px', border: '1px solid #dcdcdc6d', borderRadius: '10px', backgroundColor: 'white' }}>
                     <h1 className={style.form_head}>Sign Up</h1>
                     <SignUpForm />
                     <div className={style.line_with_text}>
